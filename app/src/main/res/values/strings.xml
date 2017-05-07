@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">Musicovery</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Reset Data</string>
     <string name="action_about">About</string>
+    <string name="action_add">Add Station</string>
+    <string name="control_now_playing">Now Playing:</string>
+    <string name="control_country_placeholder">Select a station!</string>
 
     <string-array name="tab_names">
         <item>Discover</item>
@@ -10,6 +13,290 @@
         <item>Not Found</item>
     </string-array>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="about">
+        <![CDATA[
+        <b>Musicovery</b>
+        <br>Developed by
+        <br>Peeradon Meteevorakulkij
+        <br>
+        <br>Map powered by OSMDroid
+        <br><i>github.com/osmdroid/osmdroid</i>
+        <br>
+        <br>Radio streams from Radio Browser
+        <br><i>radio-browser.info</i>
+        <br>
+        <br>Country coordinate from countries.csv by
+        <br><i>developers.google.com</i>
+        <br>
+        <br>National flag pack from
+        <br><i>flagpedia.net</i>
+        ]]>
+    </string>
+
+    <!-- String arrays used for populating MySQL database -->
+
+    <string-array name="db_country">
+        <!-- Country code & coordinate data taken from https://developers.google.com/public-data/docs/canonical/countries_csv -->
+        <item>AD,42.546245,1.601554,Andorra</item>
+        <item>AE,23.424076,53.847818,United Arab Emirates</item>
+        <item>AF,33.93911,67.709953,Afghanistan</item>
+        <item>AG,17.060816,-61.796428,Antigua and Barbuda</item>
+        <item>AI,18.220554,-63.068615,Anguilla</item>
+        <item>AL,41.153332,20.168331,Albania</item>
+        <item>AM,40.069099,45.038189,Armenia</item>
+        <item>AN,12.226079,-69.060087,Netherlands Antilles</item>
+        <item>AO,-11.202692,17.873887,Angola</item>
+        <item>AQ,-75.250973,-0.071389,Antarctica</item>
+        <item>AR,-38.416097,-63.616672,Argentina</item>
+        <item>AS,-14.270972,-170.132217,American Samoa</item>
+        <item>AT,47.516231,14.550072,Austria</item>
+        <item>AU,-25.274398,133.775136,Australia</item>
+        <item>AW,12.52111,-69.968338,Aruba</item>
+        <item>AZ,40.143105,47.576927,Azerbaijan</item>
+        <item>BA,43.915886,17.679076,Bosnia and Herzegovina</item>
+        <item>BB,13.193887,-59.543198,Barbados</item>
+        <item>BD,23.684994,90.356331,Bangladesh</item>
+        <item>BE,50.503887,4.469936,Belgium</item>
+        <item>BF,12.238333,-1.561593,Burkina Faso</item>
+        <item>BG,42.733883,25.48583,Bulgaria</item>
+        <item>BH,25.930414,50.637772,Bahrain</item>
+        <item>BI,-3.373056,29.918886,Burundi</item>
+        <item>BJ,9.30769,2.315834,Benin</item>
+        <item>BM,32.321384,-64.75737,Bermuda</item>
+        <item>BN,4.535277,114.727669,Brunei</item>
+        <item>BO,-16.290154,-63.588653,Bolivia</item>
+        <item>BR,-14.235004,-51.92528,Brazil</item>
+        <item>BS,25.03428,-77.39628,Bahamas</item>
+        <item>BT,27.514162,90.433601,Bhutan</item>
+        <item>BV,-54.423199,3.413194,Bouvet Island</item>
+        <item>BW,-22.328474,24.684866,Botswana</item>
+        <item>BY,53.709807,27.953389,Belarus</item>
+        <item>BZ,17.189877,-88.49765,Belize</item>
+        <item>CA,56.130366,-106.346771,Canada</item>
+        <item>CC,-12.164165,96.870956,Cocos [Keeling] Islands</item>
+        <item>CD,-4.038333,21.758664,Congo [DRC]</item>
+        <item>CF,6.611111,20.939444,Central African Republic</item>
+        <item>CG,-0.228021,15.827659,Congo [Republic]</item>
+        <item>CH,46.818188,8.227512,Switzerland</item>
+        <item>CI,7.539989,-5.54708,Côte d\'Ivoire</item>
+        <item>CK,-21.236736,-159.777671,Cook Islands</item>
+        <item>CL,-35.675147,-71.542969,Chile</item>
+        <item>CM,7.369722,12.354722,Cameroon</item>
+        <item>CN,35.86166,104.195397,China</item>
+        <item>CO,4.570868,-74.297333,Colombia</item>
+        <item>CR,9.748917,-83.753428,Costa Rica</item>
+        <item>CU,21.521757,-77.781167,Cuba</item>
+        <item>CV,16.002082,-24.013197,Cape Verde</item>
+        <item>CX,-10.447525,105.690449,Christmas Island</item>
+        <item>CY,35.126413,33.429859,Cyprus</item>
+        <item>CZ,49.817492,15.472962,Czech Republic</item>
+        <item>DE,51.165691,10.451526,Germany</item>
+        <item>DJ,11.825138,42.590275,Djibouti</item>
+        <item>DK,56.26392,9.501785,Denmark</item>
+        <item>DM,15.414999,-61.370976,Dominica</item>
+        <item>DO,18.735693,-70.162651,Dominican Republic</item>
+        <item>DZ,28.033886,1.659626,Algeria</item>
+        <item>EC,-1.831239,-78.183406,Ecuador</item>
+        <item>EE,58.595272,25.013607,Estonia</item>
+        <item>EG,26.820553,30.802498,Egypt</item>
+        <item>EH,24.215527,-12.885834,Western Sahara</item>
+        <item>ER,15.179384,39.782334,Eritrea</item>
+        <item>ES,40.463667,-3.74922,Spain</item>
+        <item>ET,9.145,40.489673,Ethiopia</item>
+        <item>FI,61.92411,25.748151,Finland</item>
+        <item>FJ,-16.578193,179.414413,Fiji</item>
+        <item>FK,-51.796253,-59.523613,Falkland Islands [Islas Malvinas]</item>
+        <item>FM,7.425554,150.550812,Micronesia</item>
+        <item>FO,61.892635,-6.911806,Faroe Islands</item>
+        <item>FR,46.227638,2.213749,France</item>
+        <item>GA,-0.803689,11.609444,Gabon</item>
+        <item>GB,55.378051,-3.435973,United Kingdom</item>
+        <item>GD,12.262776,-61.604171,Grenada</item>
+        <item>GE,42.315407,43.356892,Georgia</item>
+        <item>GF,3.933889,-53.125782,French Guiana</item>
+        <item>GG,49.465691,-2.585278,Guernsey</item>
+        <item>GH,7.946527,-1.023194,Ghana</item>
+        <item>GI,36.137741,-5.345374,Gibraltar</item>
+        <item>GL,71.706936,-42.604303,Greenland</item>
+        <item>GM,13.443182,-15.310139,Gambia</item>
+        <item>GN,9.945587,-9.696645,Guinea</item>
+        <item>GP,16.995971,-62.067641,Guadeloupe</item>
+        <item>GQ,1.650801,10.267895,Equatorial Guinea</item>
+        <item>GR,39.074208,21.824312,Greece</item>
+        <item>GS,-54.429579,-36.587909,South Georgia and the South Sandwich Islands</item>
+        <item>GT,15.783471,-90.230759,Guatemala</item>
+        <item>GU,13.444304,144.793731,Guam</item>
+        <item>GW,11.803749,-15.180413,Guinea-Bissau</item>
+        <item>GY,4.860416,-58.93018,Guyana</item>
+        <item>GZ,31.354676,34.308825,Gaza Strip</item>
+        <item>HK,22.396428,114.109497,Hong Kong</item>
+        <item>HM,-53.08181,73.504158,Heard Island and McDonald Islands</item>
+        <item>HN,15.199999,-86.241905,Honduras</item>
+        <item>HR,45.1,15.2,Croatia</item>
+        <item>HT,18.971187,-72.285215,Haiti</item>
+        <item>HU,47.162494,19.503304,Hungary</item>
+        <item>ID,-0.789275,113.921327,Indonesia</item>
+        <item>IE,53.41291,-8.24389,Ireland</item>
+        <item>IL,31.046051,34.851612,Israel</item>
+        <item>IM,54.236107,-4.548056,Isle of Man</item>
+        <item>IN,20.593684,78.96288,India</item>
+        <item>IO,-6.343194,71.876519,British Indian Ocean Territory</item>
+        <item>IQ,33.223191,43.679291,Iraq</item>
+        <item>IR,32.427908,53.688046,Iran</item>
+        <item>IS,64.963051,-19.020835,Iceland</item>
+        <item>IT,41.87194,12.56738,Italy</item>
+        <item>JE,49.214439,-2.13125,Jersey</item>
+        <item>JM,18.109581,-77.297508,Jamaica</item>
+        <item>JO,30.585164,36.238414,Jordan</item>
+        <item>JP,36.204824,138.252924,Japan</item>
+        <item>KE,-0.023559,37.906193,Kenya</item>
+        <item>KG,41.20438,74.766098,Kyrgyzstan</item>
+        <item>KH,12.565679,104.990963,Cambodia</item>
+        <item>KI,-3.370417,-168.734039,Kiribati</item>
+        <item>KM,-11.875001,43.872219,Comoros</item>
+        <item>KN,17.357822,-62.782998,Saint Kitts and Nevis</item>
+        <item>KP,40.339852,127.510093,North Korea</item>
+        <item>KR,35.907757,127.766922,South Korea</item>
+        <item>KW,29.31166,47.481766,Kuwait</item>
+        <item>KY,19.513469,-80.566956,Cayman Islands</item>
+        <item>KZ,48.019573,66.923684,Kazakhstan</item>
+        <item>LA,19.85627,102.495496,Laos</item>
+        <item>LB,33.854721,35.862285,Lebanon</item>
+        <item>LC,13.909444,-60.978893,Saint Lucia</item>
+        <item>LI,47.166,9.555373,Liechtenstein</item>
+        <item>LK,7.873054,80.771797,Sri Lanka</item>
+        <item>LR,6.428055,-9.429499,Liberia</item>
+        <item>LS,-29.609988,28.233608,Lesotho</item>
+        <item>LT,55.169438,23.881275,Lithuania</item>
+        <item>LU,49.815273,6.129583,Luxembourg</item>
+        <item>LV,56.879635,24.603189,Latvia</item>
+        <item>LY,26.3351,17.228331,Libya</item>
+        <item>MA,31.791702,-7.09262,Morocco</item>
+        <item>MC,43.750298,7.412841,Monaco</item>
+        <item>MD,47.411631,28.369885,Moldova</item>
+        <item>ME,42.708678,19.37439,Montenegro</item>
+        <item>MG,-18.766947,46.869107,Madagascar</item>
+        <item>MH,7.131474,171.184478,Marshall Islands</item>
+        <item>MK,41.608635,21.745275,Macedonia [FYROM]</item>
+        <item>ML,17.570692,-3.996166,Mali</item>
+        <item>MM,21.913965,95.956223,Myanmar [Burma]</item>
+        <item>MN,46.862496,103.846656,Mongolia</item>
+        <item>MO,22.198745,113.543873,Macau</item>
+        <item>MP,17.33083,145.38469,Northern Mariana Islands</item>
+        <item>MQ,14.641528,-61.024174,Martinique</item>
+        <item>MR,21.00789,-10.940835,Mauritania</item>
+        <item>MS,16.742498,-62.187366,Montserrat</item>
+        <item>MT,35.937496,14.375416,Malta</item>
+        <item>MU,-20.348404,57.552152,Mauritius</item>
+        <item>MV,3.202778,73.22068,Maldives</item>
+        <item>MW,-13.254308,34.301525,Malawi</item>
+        <item>MX,23.634501,-102.552784,Mexico</item>
+        <item>MY,4.210484,101.975766,Malaysia</item>
+        <item>MZ,-18.665695,35.529562,Mozambique</item>
+        <item>NA,-22.95764,18.49041,Namibia</item>
+        <item>NC,-20.904305,165.618042,New Caledonia</item>
+        <item>NE,17.607789,8.081666,Niger</item>
+        <item>NF,-29.040835,167.954712,Norfolk Island</item>
+        <item>NG,9.081999,8.675277,Nigeria</item>
+        <item>NI,12.865416,-85.207229,Nicaragua</item>
+        <item>NL,52.132633,5.291266,Netherlands</item>
+        <item>NO,60.472024,8.468946,Norway</item>
+        <item>NP,28.394857,84.124008,Nepal</item>
+        <item>NR,-0.522778,166.931503,Nauru</item>
+        <item>NU,-19.054445,-169.867233,Niue</item>
+        <item>NZ,-40.900557,174.885971,New Zealand</item>
+        <item>OM,21.512583,55.923255,Oman</item>
+        <item>PA,8.537981,-80.782127,Panama</item>
+        <item>PE,-9.189967,-75.015152,Peru</item>
+        <item>PF,-17.679742,-149.406843,French Polynesia</item>
+        <item>PG,-6.314993,143.95555,Papua New Guinea</item>
+        <item>PH,12.879721,121.774017,Philippines</item>
+        <item>PK,30.375321,69.345116,Pakistan</item>
+        <item>PL,51.919438,19.145136,Poland</item>
+        <item>PM,46.941936,-56.27111,Saint Pierre and Miquelon</item>
+        <item>PN,-24.703615,-127.439308,Pitcairn Islands</item>
+        <item>PR,18.220833,-66.590149,Puerto Rico</item>
+        <item>PS,31.952162,35.233154,Palestinian Territories</item>
+        <item>PT,39.399872,-8.224454,Portugal</item>
+        <item>PW,7.51498,134.58252,Palau</item>
+        <item>PY,-23.442503,-58.443832,Paraguay</item>
+        <item>QA,25.354826,51.183884,Qatar</item>
+        <item>RE,-21.115141,55.536384,Réunion</item>
+        <item>RO,45.943161,24.96676,Romania</item>
+        <item>RS,44.016521,21.005859,Serbia</item>
+        <item>RU,61.52401,105.318756,Russia</item>
+        <item>RW,-1.940278,29.873888,Rwanda</item>
+        <item>SA,23.885942,45.079162,Saudi Arabia</item>
+        <item>SB,-9.64571,160.156194,Solomon Islands</item>
+        <item>SC,-4.679574,55.491977,Seychelles</item>
+        <item>SD,12.862807,30.217636,Sudan</item>
+        <item>SE,60.128161,18.643501,Sweden</item>
+        <item>SG,1.352083,103.819836,Singapore</item>
+        <item>SH,-24.143474,-10.030696,Saint Helena</item>
+        <item>SI,46.151241,14.995463,Slovenia</item>
+        <item>SJ,77.553604,23.670272,Svalbard and Jan Mayen</item>
+        <item>SK,48.669026,19.699024,Slovakia</item>
+        <item>SL,8.460555,-11.779889,Sierra Leone</item>
+        <item>SM,43.94236,12.457777,San Marino</item>
+        <item>SN,14.497401,-14.452362,Senegal</item>
+        <item>SO,5.152149,46.199616,Somalia</item>
+        <item>SR,3.919305,-56.027783,Suriname</item>
+        <item>ST,0.18636,6.613081,São Tomé and Príncipe</item>
+        <item>SV,13.794185,-88.89653,El Salvador</item>
+        <item>SY,34.802075,38.996815,Syria</item>
+        <item>SZ,-26.522503,31.465866,Swaziland</item>
+        <item>TC,21.694025,-71.797928,Turks and Caicos Islands</item>
+        <item>TD,15.454166,18.732207,Chad</item>
+        <item>TF,-49.280366,69.348557,French Southern Territories</item>
+        <item>TG,8.619543,0.824782,Togo</item>
+        <item>TH,15.870032,100.992541,Thailand</item>
+        <item>TJ,38.861034,71.276093,Tajikistan</item>
+        <item>TK,-8.967363,-171.855881,Tokelau</item>
+        <item>TL,-8.874217,125.727539,Timor-Leste</item>
+        <item>TM,38.969719,59.556278,Turkmenistan</item>
+        <item>TN,33.886917,9.537499,Tunisia</item>
+        <item>TO,-21.178986,-175.198242,Tonga</item>
+        <item>TR,38.963745,35.243322,Turkey</item>
+        <item>TT,10.691803,-61.222503,Trinidad and Tobago</item>
+        <item>TV,-7.109535,177.64933,Tuvalu</item>
+        <item>TW,23.69781,120.960515,Taiwan</item>
+        <item>TZ,-6.369028,34.888822,Tanzania</item>
+        <item>UA,48.379433,31.16558,Ukraine</item>
+        <item>UG,1.373333,32.290275,Uganda</item>
+        <item>US,37.09024,-95.712891,United States</item>
+        <item>UY,-32.522779,-55.765835,Uruguay</item>
+        <item>UZ,41.377491,64.585262,Uzbekistan</item>
+        <item>VA,41.902916,12.453389,Vatican City</item>
+        <item>VC,12.984305,-61.287228,Saint Vincent and the Grenadines</item>
+        <item>VE,6.42375,-66.58973,Venezuela</item>
+        <item>VG,18.420695,-64.639968,British Virgin Islands</item>
+        <item>VI,18.335765,-64.896335,U.S. Virgin Islands</item>
+        <item>VN,14.058324,108.277199,Vietnam</item>
+        <item>VU,-15.376706,166.959158,Vanuatu</item>
+        <item>WF,-13.768752,-177.156097,Wallis and Futuna</item>
+        <item>WS,-13.759029,-172.104629,Samoa</item>
+        <item>XK,42.602636,20.902977,Kosovo</item>
+        <item>YE,15.552727,48.516388,Yemen</item>
+        <item>YT,-12.8275,45.166244,Mayotte</item>
+        <item>ZA,-30.559482,22.937506,South Africa</item>
+        <item>ZM,-13.133897,27.849332,Zambia</item>
+        <item>ZW,-19.015438,29.154857,Zimbabwe</item>
+    </string-array>
+
+    <string-array name="db_station">
+        <!-- Streams taken from http://www.radio-browser.info -->
+        <item>Bauermedia,http://stream1.bauermedia.fi/radiocity.mp3,FI</item>
+        <item>Metro Radio 90.5 Khon Kaen,http://radio4.thzhost.com:4114/;,TH</item>
+        <item>24/7 Tamil Christian Radio,http://listen.shoutcast.com/24-7tamilchristianradio.m3u,IN</item>
+        <item>Chiru,https://chiru.no:8080/stream.ogg,JP</item>
+        <item>Antenne Niedersachsen,http://stream.antenne.com/antenne-nds/mp3-192/linux/,DE</item>
+        <item>101.ru - Beatles,http://ic2.101.ru:8000/c10_3,RU</item>
+        <item>Catz Music Türkiye,http://usa6.fastcast4u.com:5157/stream,TR</item>
+        <item>Amica Radio Veneta,http://37.187.120.51:8010/stream,IT</item>
+        <item>Cadena 100,http://cadena100.cope.stream.flumotion.com/cope/cadena100.mp3.m3u,ES</item>
+        <item>Akademickie Radio Bit,http://91.232.4.33:9203/stream,PL</item>
+        <item>AsiaFM (亞洲電台),http://asiafm.rastream.com/asiafm-fly,TW</item>
+        <item>702 DZAS,http://icecast.eradioportal.com:8000/febc_dzas,PH</item>
+    </string-array>
+
 </resources>

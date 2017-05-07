@@ -4,6 +4,14 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.view.MotionEvent;
+
+/**
+ * A custom class that extends from FragmentPagerAdapter
+ *
+ * The class takes 3 fragments as input parameters
+ * these input fragments are used by FragmentPagerAdapter to populate the ViewPager
+ */
 
 public class MainPageAdapter extends FragmentPagerAdapter {
     final private int PAGE_COUNT = 3;
@@ -52,6 +60,4 @@ public class MainPageAdapter extends FragmentPagerAdapter {
                 return null;
         }
     }
-
-
 }

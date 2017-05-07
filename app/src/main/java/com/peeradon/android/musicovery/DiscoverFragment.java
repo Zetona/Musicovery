@@ -2,6 +2,7 @@ package com.peeradon.android.musicovery;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.database.MergeCursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -13,58 +14,109 @@ import org.osmdroid.util.GeoPoint;
 
 public class DiscoverFragment extends ListFragment {
 
-    SongListIF mListener;
+    StationListIF mListener;
+    private String countryCode;
 
     public void onActivityCreated(Bundle savedState) {
         super.onActivityCreated(savedState);
-
-        // get access to database
-        SongsOpenHelper dbHelper = new SongsOpenHelper(getActivity().getApplicationContext());
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-
-        // query for songs in database
-        Cursor songCursor = db.rawQuery("SELECT * FROM " + SongsOpenHelper.SONG_TABLE_NAME, null);
-
-        // bind CursorAdaptor to ListAdapter
-        SongCursorAdapter songAdapter = new SongCursorAdapter(this.getContext(), songCursor);
-        setListAdapter(songAdapter);
+        // update ListView
+        update(countryCode);
     }
 
     public void onAttach(Context context) {
+        // check if activity implements StationListIF
         super.onAttach(context);
         try{
-            mListener = (SongListIF) context;
+            mListener = (StationListIF) context;
         } catch(ClassCastException e) {
-            throw new ClassCastException(context.toString() + " must implement SongListIF");
+            throw new ClassCastException(context.toString() + " must implement StationListIF");
         }
     }
 
     public void onListItemClick(ListView l, View v, int pos, long id) {
         // database query to get the info of the song that is clicked
         // get access to database
-        SongsOpenHelper dbHelper = new SongsOpenHelper(getActivity().getApplicationContext());
+        StationsOpenHelper dbHelper = new StationsOpenHelper(getActivity().getApplicationContext());
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         // query for the clicked song
-        Cursor songCursor = db.rawQuery("SELECT * FROM " + SongsOpenHelper.SONG_TABLE_NAME + " WHERE _id = " + Long.toString(id) , null);
-        songCursor.moveToFirst();
-        Cursor countryCursor = db.rawQuery("SELECT * FROM " + SongsOpenHelper.COUNTRY_TABLE_NAME + " WHERE _id = " + songCursor.getInt(songCursor.getColumnIndex(SongsOpenHelper.KEY_COUNTRY_ID)) , null);
-        countryCursor.moveToFirst();
-
-        Log.v("Song Select:", songCursor.getString(songCursor.getColumnIndex(SongsOpenHelper.KEY_NAME)));
-        Log.v("Country:", countryCursor.getString(countryCursor.getColumnIndex(SongsOpenHelper.KEY_NAME)));
+        // SELECT * FROM <STATION_TABLE_NAME> INNER JOIN <COUNTRY_TABLE_NAME> ON <STATION_TABLE_NAME.KEY_COUNTRY_CODE> = <COUNTRY_TABLE_NAME.KEY_COUNTRY_CODE> WHERE <KEY_ID> = id
+        Cursor stationCursor = db.rawQuery("SELECT * FROM " + StationsOpenHelper.STATION_TABLE_NAME +
+                " INNER JOIN " + StationsOpenHelper.COUNTRY_TABLE_NAME + " ON " +
+                StationsOpenHelper.STATION_TABLE_NAME + "."+ StationsOpenHelper.KEY_COUNTRY_CODE + " = " +
+                StationsOpenHelper.COUNTRY_TABLE_NAME + "."+ StationsOpenHelper.KEY_COUNTRY_CODE +
+                " WHERE " + StationsOpenHelper.KEY_ID + " = " + Long.toString(id), null);
+        stationCursor.moveToFirst();
 
         // get the stream URL of song to be played
-        String trackID = songCursor.getString(songCursor.getColumnIndex(SongsOpenHelper.KEY_TRACK_ID));
-
+        String streamURL = stationCursor.getString(stationCursor.getColumnIndex(StationsOpenHelper.KEY_STREAM_URL));
         // get the location to be shown on MapFragment
-        GeoPoint location = new GeoPoint(countryCursor.getFloat(countryCursor.getColumnIndex(SongsOpenHelper.KEY_LATITUDE)), countryCursor.getFloat(countryCursor.getColumnIndex(SongsOpenHelper.KEY_LONGITUDE)));
-
+        GeoPoint location = new GeoPoint(stationCursor.getFloat(stationCursor.getColumnIndex(StationsOpenHelper.KEY_LATITUDE)), stationCursor.getFloat(stationCursor.getColumnIndex(StationsOpenHelper.KEY_LONGITUDE)));
         // get the name of the country to be used on InfoFragment
-        String country = countryCursor.getString(countryCursor.getColumnIndex(SongsOpenHelper.KEY_NAME));
+        String country = stationCursor.getString(stationCursor.getColumnIndex(StationsOpenHelper.KEY_COUNTRY_NAME));
+        // get the country code to be used by music control on MainActivity
+        String countryCode = stationCursor.getString(stationCursor.getColumnIndex(StationsOpenHelper.KEY_COUNTRY_CODE));
 
-        // pass the gathered info to MainActivity via the interface SongListIF
-        mListener.onSongSelected(trackID, location, country);
+        // pass the gathered info to MainActivity via the interface StationListIF
+        mListener.onStationSelected(streamURL, location, country, countryCode);
+    }
+
+    public void update(String countryCode){
+        this.countryCode = countryCode;
+
+        // get access to database
+        StationsOpenHelper dbHelper = new StationsOpenHelper(getActivity().getApplicationContext());
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        // query for stations in database
+        Cursor stationCursor;
+
+        if (countryCode == null) { // execute when location service is not available
+
+            // SELECT * FROM <STATION_TABLE_NAME>
+            // INNER JOIN <COUNTRY_TABLE_NAME> ON <STATION_TABLE_NAME.KEY_COUNTRY_CODE> = <COUNTRY_TABLE_NAME.KEY_COUNTRY_CODE>
+            // ORDER BY <COUNTRY_TABLE_NAME.KEY_COUNTRY_NAME>, <KEY_STATION_NAME>
+            stationCursor = db.rawQuery("SELECT * FROM " + StationsOpenHelper.STATION_TABLE_NAME +
+                    " INNER JOIN " + StationsOpenHelper.COUNTRY_TABLE_NAME + " ON " +
+                    StationsOpenHelper.STATION_TABLE_NAME + "." + StationsOpenHelper.KEY_COUNTRY_CODE + " = " +
+                    StationsOpenHelper.COUNTRY_TABLE_NAME + "." + StationsOpenHelper.KEY_COUNTRY_CODE +
+                    " ORDER BY " + StationsOpenHelper.COUNTRY_TABLE_NAME + "." + StationsOpenHelper.KEY_COUNTRY_NAME +
+                    ", " + StationsOpenHelper.KEY_STATION_NAME, null);
+        }
+        else { // execute when location is available
+
+            // first cursor : select the country at the current location, to be shown as the first elements of ListView
+            // SELECT * FROM <STATION_TABLE_NAME>
+            // INNER JOIN <COUNTRY_TABLE_NAME> ON <STATION_TABLE_NAME.KEY_COUNTRY_CODE> = <COUNTRY_TABLE_NAME.KEY_COUNTRY_CODE>
+            // WHERE <COUNTRY_TABLE_NAME.KEY_COUNTRY_CODE> = countryCode
+            // ORDER BY <KEY_STATION_NAME>
+            Cursor stationCurrentCountryCursor = db.rawQuery("SELECT * FROM " + StationsOpenHelper.STATION_TABLE_NAME +
+                    " INNER JOIN " + StationsOpenHelper.COUNTRY_TABLE_NAME + " ON " +
+                    StationsOpenHelper.STATION_TABLE_NAME + "." + StationsOpenHelper.KEY_COUNTRY_CODE + " = " +
+                    StationsOpenHelper.COUNTRY_TABLE_NAME + "." + StationsOpenHelper.KEY_COUNTRY_CODE +
+                    " WHERE " + StationsOpenHelper.COUNTRY_TABLE_NAME + "." + StationsOpenHelper.KEY_COUNTRY_CODE + " = '" + countryCode +
+                    "' ORDER BY " + StationsOpenHelper.KEY_STATION_NAME, null);
+
+            // second cursor : select the countries that is not the current location
+            // SELECT * FROM <STATION_TABLE_NAME>
+            // INNER JOIN <COUNTRY_TABLE_NAME> ON <STATION_TABLE_NAME.KEY_COUNTRY_CODE> = <COUNTRY_TABLE_NAME.KEY_COUNTRY_CODE>
+            // WHERE <COUNTRY_TABLE_NAME.KEY_COUNTRY_CODE> != countryCode
+            // ORDER BY <COUNTRY_TABLE_NAME.KEY_COUNTRY_NAME>, <KEY_STATION_NAME>
+            Cursor stationNotCurrentCountryCursor = db.rawQuery("SELECT * FROM " + StationsOpenHelper.STATION_TABLE_NAME +
+                    " INNER JOIN " + StationsOpenHelper.COUNTRY_TABLE_NAME + " ON " +
+                    StationsOpenHelper.STATION_TABLE_NAME + "." + StationsOpenHelper.KEY_COUNTRY_CODE + " = " +
+                    StationsOpenHelper.COUNTRY_TABLE_NAME + "." + StationsOpenHelper.KEY_COUNTRY_CODE +
+                    " WHERE " + StationsOpenHelper.COUNTRY_TABLE_NAME + "." + StationsOpenHelper.KEY_COUNTRY_CODE + " <> '" + countryCode +
+                    "' ORDER BY " + StationsOpenHelper.COUNTRY_TABLE_NAME + "." + StationsOpenHelper.KEY_COUNTRY_NAME +
+                    ", " + StationsOpenHelper.KEY_STATION_NAME, null);
+
+            // merge the two cursors
+            stationCursor = new MergeCursor(new Cursor[] {stationCurrentCountryCursor, stationNotCurrentCountryCursor});
+        }
+
+        // bind CursorAdaptor to ListAdapter
+        StationCursorAdapter stationAdapter = new StationCursorAdapter(this.getContext(), stationCursor, countryCode);
+        setListAdapter(stationAdapter);
     }
 
 }
