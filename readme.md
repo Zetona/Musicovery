@@ -32,10 +32,9 @@ The song people listen to doesn't necessary be the song that people understand t
 
 ## Screenshots
 
-<img src="http://i.imgur.com/dG8sfOw.png" width=200><img src="http://i.imgur.com/eBw3rV6.png" width=200><img src="http://i.imgur.com/umC7WgA.png" width=200>
+<img src="http://i.imgur.com/dG8sfOw.png" width=200>   <img src="http://i.imgur.com/eBw3rV6.png" width=200>   <img src="http://i.imgur.com/umC7WgA.png" width=200>
 <br>
-<img src="http://i.imgur.com/oN8LfOf.png" width=200><img src="http://i.imgur.com/dLzqj5c.png" width=200>
-
+<img src="http://i.imgur.com/oN8LfOf.png" width=200>   <img src="http://i.imgur.com/dLzqj5c.png" width=200>
 
 ## About
 
