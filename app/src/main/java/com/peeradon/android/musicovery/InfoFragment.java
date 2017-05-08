@@ -10,6 +10,13 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+/**
+ * InfoFragment.java
+ * A Fragment that shows a WebView pointing to Wikipedia
+ *
+ * Has a public method that the MainActivity can call to change the URL of the WebView
+ */
+
 public class InfoFragment extends Fragment {
 
     private String country;

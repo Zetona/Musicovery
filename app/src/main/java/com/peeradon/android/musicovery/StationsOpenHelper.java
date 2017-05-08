@@ -5,6 +5,11 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+/**
+ * StationsOpenHelper.java
+ * A SQLiteOpenHelper class that takes care of the database
+ */
+
 public class StationsOpenHelper extends SQLiteOpenHelper {
     static final String DATABASE_NAME = "musicovery_db";
     private static final int DATABASE_VERSION = 2;

@@ -6,9 +6,10 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 
 /**
+ * MainViewPager.java
  * A custom class that extends from ViewPager
  *
- * This custom class exists to make a custom ViewPager
+ * This custom class exists to make a custom ViewPager,
  * where the second "item" (page) has its swiping functionality disabled,
  * since the second "item" is the page where OSMDroid map is shown, and the swiping
  * functionality of the ViewPager will interfere with OSMDroid map's

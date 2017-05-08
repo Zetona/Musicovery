@@ -5,22 +5,16 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import static com.peeradon.android.musicovery.MainActivity.Broadcast_PLAY_NEW_AUDIO;
-
 /**
+ * AddStationActivity.java
  * An Activity that is shown when user clicks the "plus" icon on MainActivity's toolbar
  *
  * This activity shows a form to user willing to add a new radio station to the database

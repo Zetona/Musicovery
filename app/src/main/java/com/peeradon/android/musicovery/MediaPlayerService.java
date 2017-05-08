@@ -14,7 +14,7 @@ import android.util.Log;
 import java.io.IOException;
 
 /**
- *
+ * MediaPlayerService.java
  * A service that handles media streaming playback
  *
  * Service adapted from the guide

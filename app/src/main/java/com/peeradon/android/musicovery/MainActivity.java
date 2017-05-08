@@ -36,6 +36,7 @@ import java.util.List;
 import java.util.Locale;
 
 /**
+ * MainActivity.java
  * The MainActivity
  *
  * This class manage communications between fragments (via interface and public methods)

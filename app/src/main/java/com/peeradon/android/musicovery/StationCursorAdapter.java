@@ -10,6 +10,11 @@ import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/**
+ * StationCursorAdaptor.java
+ * A CursorAdaptor that populates the layout item_station.xml with the data from the cursor
+ */
+
 class StationCursorAdapter extends CursorAdapter {
     private String countryCode;
 

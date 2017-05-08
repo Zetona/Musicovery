@@ -4,9 +4,9 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.view.MotionEvent;
 
 /**
+ * MainPageAdapter.java
  * A custom class that extends from FragmentPagerAdapter
  *
  * The class takes 3 fragments as input parameters

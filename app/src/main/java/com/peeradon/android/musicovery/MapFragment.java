@@ -17,6 +17,13 @@ import org.osmdroid.views.overlay.OverlayItem;
 
 import java.util.ArrayList;
 
+/**
+ * MapFragment.java
+ * A Fragment that shows a MapView via OSMDriod
+ *
+ * Has a public method that the MainActivity can call to change the coordinate of map center and marker
+ */
+
 public class MapFragment extends Fragment {
     private MapView map;
     private IMapController mapController;

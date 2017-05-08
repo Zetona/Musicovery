@@ -12,6 +12,14 @@ import android.widget.ListView;
 
 import org.osmdroid.util.GeoPoint;
 
+/**
+ * DiscoverFragment.java
+ * A Fragment that populates ListView with stations via cursor to the database
+ *
+ * Has a click listener to change the station being streamed
+ * Has a public method that the MainActivity can call to repopulate the ListView
+ */
+
 public class DiscoverFragment extends ListFragment {
 
     StationListIF mListener;
