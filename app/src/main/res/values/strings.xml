@@ -5,6 +5,11 @@
     <string name="action_add">Add Station</string>
     <string name="control_now_playing">Now Playing:</string>
     <string name="control_country_placeholder">Select a station!</string>
+    <string name="add_station_activity_name">Station Name</string>
+    <string name="add_station_activity_url">Stream URL</string>
+    <string name="add_station_activity_country">Country</string>
+    <string name="add_station_activity_add">Add</string>
+    <string name="popup_about">About</string>
 
     <string-array name="tab_names">
         <item>Discover</item>
