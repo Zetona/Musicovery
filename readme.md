@@ -10,9 +10,21 @@ The song people listen to doesn't necessary be the song that people understand t
 ## Main Features
 
 * Listen to song streams
-* View the map of the song’s country of origin
+* View map of the song’s country of origin
 * Use WebView to read more info about the country
 * Add song streams
+
+## Implementation
+
+* Fragments
+* MapView via OSMDroid
+* WebView showing country information from Wikipedia
+* MediaPlayer
+* Service for MediaPlayer
+* Broadcasts for MediaPlayer control
+* Google Places API for location
+* GeoCoder for country code
+* SQLiteDatabase
 
 ## Mockup
 
@@ -20,27 +32,32 @@ The song people listen to doesn't necessary be the song that people understand t
 
 ## Screenshots
 
-![Screenshots](http://i.imgur.com/MhMRGA0.jpg)
+[<img src="http://i.imgur.com/dG8sfOw.png" width=200>]
+(http://i.imgur.com/dG8sfOw.png)
+[<img src="http://i.imgur.com/eBw3rV6.png" width=200>]
+(http://i.imgur.com/eBw3rV6.png)
+[<img src="http://i.imgur.com/umC7WgA.png" width=200>]
+(http://i.imgur.com/umC7WgA.png)
+<br>
+[<img src="http://i.imgur.com/oN8LfOf.png" width=200>]
+(http://i.imgur.com/oN8LfOf.png)
+[<img src="http://i.imgur.com/dLzqj5c.png" width=200>]
+(http://i.imgur.com/dLzqj5c.png)
 
 ## About
 
-<b>Musicovery</b>
-
+<b>Musicovery</b><br>
 Developed by
 Peeradon Meteevorakulkij
 
 * Map powered by OSMDroid
-
-<i>github.com/osmdroid/osmdroid</i>
+<br><i>github.com/osmdroid/osmdroid</i>
 
 * Radio streams from Radio Browser
-
-<i>radio-browser.info</i>
+<br><i>radio-browser.info</i>
 
 * Country coordinate from countries.csv by
-
-<i>developers.google.com</i>
+<br><i>developers.google.com</i>
 
 * National flag pack from
-
-<i>flagpedia.net</i>
+<br><i>flagpedia.net</i>
