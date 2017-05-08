@@ -25,17 +25,22 @@ The song people listen to doesn't necessary be the song that people understand t
 ## About
 
 <b>Musicovery</b>
+
 Developed by
 Peeradon Meteevorakulkij
 
 Map powered by OSMDroid
+
 <i>github.com/osmdroid/osmdroid</i>
 
 Radio streams from Radio Browser
+
 <i>radio-browser.info</i>
 
 Country coordinate from countries.csv by
+
 <i>developers.google.com</i>
 
 National flag pack from
+
 <i>flagpedia.net</i>
